@@ -1,0 +1,27 @@
+[
+    {
+        "uid": "area_1",
+        "name": "Obra Civil",
+        "plane": null
+    },
+    {
+        "uid": "area_2",
+        "name": "Acabados",
+        "plane": null
+    },
+    {
+        "uid": "area_3",
+        "name": "Obra Civil",
+        "plane": null
+    },
+    {
+        "uid": "area_4",
+        "name": "Entregas",
+        "plane": null
+    },
+    {
+        "uid": "area_5",
+        "name": "Mejoras",
+        "plane": null
+    }
+]
