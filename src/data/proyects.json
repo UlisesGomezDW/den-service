@@ -1,0 +1,17 @@
+[
+    {
+        "uid": "proyect_1",
+        "name": "Lomas de Fátima",
+        "area": ["area_1", "area_2", "area_3", "area_4", "area_5"]
+    },
+    {
+        "uid": "proyect_2",
+        "name": "Santa María",
+        "area": ["area_1", "area_2"]
+    },
+    {
+        "uid": "proyect_3",
+        "name": "Alyssa",
+        "area": ["area_2", "area_4"]
+    }
+]

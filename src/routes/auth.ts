@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { response_error, response_success } from "src/constants"
+import { response_error, response_success } from "./../constants"
 import data from "./../data/users.json"
 
 export async function login(req: Request, res: Response) {
