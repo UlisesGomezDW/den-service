@@ -12,7 +12,7 @@ const apiRouter = express.Router()
 const server = new http.Server(app)
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Server is running!")
+    res.send("Server is running! 🐶")
 })
 app.use("/api", apiRouter)
 app.get("/ping", (_, res) => {
