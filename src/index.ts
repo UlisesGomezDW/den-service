@@ -1,15 +1,20 @@
 import express, { Express, Request, Response } from "express"
 import dotenv from "dotenv"
 import http from "http"
+import cors from "cors"
+import morgan from "morgan"
 
 dotenv.config()
 
-import { login } from "./routes/auth"
+import authRouter from "./routes/auth"
 import proyectsRouter from "./routes/proyects"
 
 const app: Express = express()
 const apiRouter = express.Router()
 const server = new http.Server(app)
+
+app.use(cors())
+app.use(morgan("dev"))
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Server is running! 🐶")
@@ -18,7 +23,7 @@ app.use("/api", apiRouter)
 app.get("/ping", (_, res) => {
     res.json({ pong: true }).status(301)
 })
-apiRouter.use("/auth", login)
+apiRouter.use("/auth", authRouter)
 apiRouter.use("/proyects", proyectsRouter)
 
 const host = process.env.HOST || "0.0.0.0"

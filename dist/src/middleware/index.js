@@ -22,6 +22,9 @@ function authMiddleware(req, res, next) {
         }
         else {
             const token = req.headers.authorization.split("Bearer ")[1];
+            if (!token) {
+                res.json(Object.assign(Object.assign({}, constants_1.response_error), { message: "not resived token", error: true })).status(401);
+            }
             let payload = null;
             try {
                 payload = users_json_1.default === null || users_json_1.default === void 0 ? void 0 : users_json_1.default.find((user) => user.id === 1);

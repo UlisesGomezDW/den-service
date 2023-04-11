@@ -1,8 +1,10 @@
-import { Request, Response } from "express"
+import { Router, Request, Response } from "express"
 import { response_error, response_success } from "./../constants"
 import data from "./../data/users.json"
 
-export async function login(req: Request, res: Response) {
+const router = Router()
+
+router.post("/login", (req: Request, res: Response) => {
     const { username, password } = req.body
     try {
         if (username && password) {
@@ -23,4 +25,6 @@ export async function login(req: Request, res: Response) {
         console.error(err)
         res.json({ ...response_error, message: err?.message })
     }
-}
+})
+
+export default router
