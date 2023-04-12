@@ -1,0 +1,30 @@
+[
+    {
+        "uid": "plot_1",
+        "model": "Lisboa",
+        "status": "to-do",
+        "progress": 0,
+        "groups": []
+    },
+    {
+        "uid": "plot_2",
+        "model": "Alcalá",
+        "status": "in-process",
+        "progress": 50,
+        "groups": []
+    },
+    {
+        "uid": "plot_3",
+        "model": "Alcalá",
+        "status": "in-process",
+        "progress": 50,
+        "groups": []
+    },
+    {
+        "uid": "plot_4",
+        "model": "Lisboa",
+        "status": "in-process",
+        "progress": 100,
+        "groups": []
+    }
+]
