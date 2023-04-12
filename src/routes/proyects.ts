@@ -13,7 +13,13 @@ router.get("/", (req: Request, res: Response) => {
         const data = proyects.map((item) => {
             return {
                 ...item,
-                area: item.area.map((key) => area.find(({ uid }) => uid === key)),
+                area: item.area.map((key) => {
+                    let picker = area.find(({ uid }) => uid === key)
+                    return {
+                        name: picker?.name,
+                        plane: picker?.plane,
+                    }
+                }),
             }
         })
         res.json({

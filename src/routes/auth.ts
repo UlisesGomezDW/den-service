@@ -12,12 +12,20 @@ router.post("/login", (req: Request, res: Response) => {
 
             const user = data?.find((user: any) => user.username === username && user.password === password)
 
-            res.json({
-                ...response_success,
-                token: token,
-                message: "success login",
-                data: { ...user, password: "..." },
-            }).status(200)
+            if (user) {
+                res.json({
+                    ...response_success,
+                    token: token,
+                    message: "success login",
+                    data: { ...user, password: "...", token },
+                }).status(200)
+            } else {
+                res.json({
+                    ...response_error,
+                    message: "user not found",
+                    data: null,
+                }).status(200)
+            }
         } else {
             res.json({ ...response_error, message: "username or password not received" }).status(404)
         }

@@ -2,26 +2,26 @@
     {
         "uid": "area_1",
         "name": "Obra Civil",
-        "plane": null
+        "plane": "plane_1"
     },
     {
         "uid": "area_2",
         "name": "Acabados",
-        "plane": null
+        "plane": "plane_2"
     },
     {
         "uid": "area_3",
         "name": "Obra Civil",
-        "plane": null
+        "plane": "plane_3"
     },
     {
         "uid": "area_4",
         "name": "Entregas",
-        "plane": null
+        "plane": "plane_4"
     },
     {
         "uid": "area_5",
         "name": "Mejoras",
-        "plane": null
+        "plane": "plane_5"
     }
 ]

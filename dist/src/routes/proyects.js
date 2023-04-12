@@ -13,7 +13,13 @@ router.use(middleware_1.authMiddleware);
 router.get("/", (req, res) => {
     try {
         const data = proyects_json_1.default.map((item) => {
-            return Object.assign(Object.assign({}, item), { area: item.area.map((key) => area_json_1.default.find(({ uid }) => uid === key)) });
+            return Object.assign(Object.assign({}, item), { area: item.area.map((key) => {
+                    let picker = area_json_1.default.find(({ uid }) => uid === key);
+                    return {
+                        name: picker === null || picker === void 0 ? void 0 : picker.name,
+                        plane: picker === null || picker === void 0 ? void 0 : picker.plane,
+                    };
+                }) });
         });
         res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data })).status(200);
     }
