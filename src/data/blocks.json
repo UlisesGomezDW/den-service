@@ -1,0 +1,27 @@
+[
+    {
+        "uid": "block_1",
+        "plots": ["plot_1", "plot_2", "plot_3"],
+        "name": "Mza01"
+    },
+    {
+        "uid": "block_2",
+        "plots": ["plot_1", "plot_2", "plot_3", "plot_4"],
+        "name": "Mza02"
+    },
+    {
+        "uid": "block_3",
+        "plots": ["plot_1", "plot_2"],
+        "name": "Mza03"
+    },
+    {
+        "uid": "block_4",
+        "plots": ["plot_1", "plot_2", "plot_3"],
+        "name": "Mza04"
+    },
+    {
+        "uid": "block_5",
+        "plots": ["plot_1", "plot_2", "plot_3", "plot_4"],
+        "name": "Mza05"
+    }
+]

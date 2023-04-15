@@ -4,26 +4,26 @@
         "model": "Lisboa",
         "status": "to-do",
         "progress": 0,
-        "groups": []
+        "groups": ["group_1", "group_2", "group_3", "group_4", "group_5"]
     },
     {
         "uid": "plot_2",
         "model": "Alcalá",
-        "status": "in-process",
+        "status": "in-progress",
         "progress": 50,
         "groups": []
     },
     {
         "uid": "plot_3",
         "model": "Alcalá",
-        "status": "in-process",
+        "status": "in-progress",
         "progress": 50,
         "groups": []
     },
     {
         "uid": "plot_4",
         "model": "Lisboa",
-        "status": "in-process",
+        "status": "finished",
         "progress": 100,
         "groups": []
     }

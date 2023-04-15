@@ -9,6 +9,16 @@ const middleware_1 = require("../middleware");
 const plots_json_1 = __importDefault(require("../data/plots.json"));
 const router = (0, express_1.Router)();
 router.use(middleware_1.authMiddleware);
+const getPlot = (array) => array.map(({ uid, status, progress, model }, index) => {
+    return {
+        uid,
+        number: index + 1,
+        status,
+        model,
+        incidents: index === 2 ? 2 : 0,
+        progress,
+    };
+});
 router.get("/:id", (req, res) => {
     const { id } = req.params;
     console.log(id);
@@ -18,17 +28,30 @@ router.get("/:id", (req, res) => {
             blocks: [
                 {
                     number: 1,
-                    plots: plots_json_1.default.map(({ uid, status, progress }, index) => {
-                        return {
-                            uid,
-                            number: index + 1,
-                            status,
-                            incidents: index === 2 ? 2 : 0,
-                            progress,
-                        };
-                    }),
+                    plots: getPlot(plots_json_1.default),
+                },
+                {
+                    number: 2,
+                    plots: getPlot([plots_json_1.default[0]]),
                 },
             ],
+        };
+        res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data })).status(200);
+    }
+    catch (err) {
+        console.error(err);
+        res.json(Object.assign(Object.assign({}, constants_1.response_error), { message: err === null || err === void 0 ? void 0 : err.message }));
+    }
+});
+router.get("/totals/:id", (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    try {
+        const data = {
+            toDo: 1,
+            inProgress: 2,
+            finished: 1,
+            incidents: 1,
         };
         res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data })).status(200);
     }
