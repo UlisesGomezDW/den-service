@@ -1,0 +1,27 @@
+[
+    {
+        "uid": "plane_1",
+        "streets": ["street_1"],
+        "blocks": ["block_1", "block_2", "block_3"]
+    },
+    {
+        "uid": "plane_2",
+        "streets": ["street_1"],
+        "blocks": ["block_4", "block_5"]
+    },
+    {
+        "uid": "plane_3",
+        "streets": ["street_1"],
+        "blocks": ["block_2", "block_3"]
+    },
+    {
+        "uid": "plane_4",
+        "streets": ["street_1"],
+        "blocks": ["block_1", "block_3"]
+    },
+    {
+        "uid": "plane_5",
+        "streets": ["street_1"],
+        "blocks": ["block_1", "block_3", "block_4"]
+    }
+]

@@ -10,6 +10,8 @@ dotenv.config()
 import authRouter from "./routes/auth"
 import proyectsRouter from "./routes/proyects"
 import planeRouter from "./routes/plane"
+import usersRouter from "./routes/users"
+import plotsRouter from "./routes/plots"
 
 const app: Express = express()
 const apiRouter = express.Router()
@@ -30,6 +32,8 @@ app.get("/ping", (_, res) => {
 apiRouter.use("/auth", authRouter)
 apiRouter.use("/proyects", proyectsRouter)
 apiRouter.use("/plane", planeRouter)
+apiRouter.use("/users", usersRouter)
+apiRouter.use("/plots", plotsRouter)
 
 const host = process.env.HOST || "0.0.0.0"
 const port = Number(process.env.PORT) || 5000

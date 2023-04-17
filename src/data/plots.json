@@ -4,27 +4,31 @@
         "model": "Lisboa",
         "status": "to-do",
         "progress": 0,
-        "groups": ["group_1", "group_2", "group_3", "group_4", "group_5"]
+        "groups": ["group_1", "group_2", "group_3", "group_4", "group_5"],
+        "finishedDate": ""
     },
     {
         "uid": "plot_2",
         "model": "Alcalá",
         "status": "in-progress",
         "progress": 50,
-        "groups": []
+        "groups": [],
+        "finishedDate": ""
     },
     {
         "uid": "plot_3",
         "model": "Alcalá",
         "status": "in-progress",
         "progress": 50,
-        "groups": []
+        "groups": [],
+        "finishedDate": ""
     },
     {
         "uid": "plot_4",
         "model": "Lisboa",
         "status": "finished",
         "progress": 100,
-        "groups": []
+        "groups": [],
+        "finishedDate": "2023-04-17T21:11:33.505Z"
     }
 ]

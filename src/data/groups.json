@@ -1,0 +1,42 @@
+[
+    {
+        "uid": "group_1",
+        "name": "OC - LC Obra civil",
+        "progress": 50,
+        "piecework": ["piecework_1", "piecework_2", "piecework_3", "piecework_4", "piecework_5"],
+        "startDate": "2021-10-05T14:48:00.000Z",
+        "deadline": "2022-04-30T14:48:00.000Z"
+    },
+    {
+        "uid": "group_2",
+        "name": "Acabados",
+        "progress": 70,
+        "piecework": ["piecework_1"],
+        "startDate": "2022-01-01T14:48:00.000Z",
+        "deadline": "2022-11-24T14:48:00.000Z"
+    },
+    {
+        "uid": "group_3",
+        "name": "CT",
+        "progress": 20,
+        "piecework": ["piecework_1", "piecework_2"],
+        "startDate": "2021-05-15T14:48:00.000Z",
+        "deadline": "2022-05-02T14:48:00.000Z"
+    },
+    {
+        "uid": "group_4",
+        "name": "Entregas",
+        "progress": 80,
+        "piecework": ["piecework_1", "piecework_2", "piecework_3", "piecework_4"],
+        "startDate": "2020-10-15T14:48:00.000Z",
+        "deadline": "2022-08-22T14:48:00.000Z"
+    },
+    {
+        "uid": "group_5",
+        "name": "OC - LC Obra civil",
+        "progress": 10,
+        "piecework": ["piecework_1", "piecework_2", "piecework_3"],
+        "startDate": "2022-02-19T14:48:00.000Z",
+        "deadline": "2022-09-09T14:48:00.000Z"
+    }
+]

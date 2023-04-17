@@ -1,0 +1,27 @@
+[
+    {
+        "uid": "block_1",
+        "plots": ["plot_1", "plot_2", "plot_4"],
+        "number": 1
+    },
+    {
+        "uid": "block_2",
+        "plots": ["plot_1", "plot_2", "plot_3", "plot_4"],
+        "number": 2
+    },
+    {
+        "uid": "block_3",
+        "plots": ["plot_1", "plot_2"],
+        "number": 3
+    },
+    {
+        "uid": "block_4",
+        "plots": ["plot_1", "plot_2", "plot_3"],
+        "number": 4
+    },
+    {
+        "uid": "block_5",
+        "plots": ["plot_1", "plot_2", "plot_3", "plot_4"],
+        "number": 5
+    }
+]
