@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express"
 import { response_error, response_success } from "../constants"
 import { authMiddleware } from "../middleware"
-
+import incidents from "../data/incidents.json"
 const router = Router()
 
 router.use(authMiddleware)
@@ -30,13 +30,14 @@ router.post("/", (req: Request, res: Response) => {
 })
 
 router.post("/solution", (req: Request, res: Response) => {
-    const { photos = [], detail = "" } = req.body
+    const { photos = [], detail = "", incidentId = "" } = req.body
     try {
         if (Object.values(req.body).length > 0) {
             res.json({
                 ...response_success,
                 message: "success",
                 data: {
+                    incidentId,
                     photos,
                     detail,
                 },
@@ -53,18 +54,7 @@ router.post("/solution", (req: Request, res: Response) => {
 router.get("/:id", (req: Request, res: Response) => {
     const { id } = req.params
     try {
-        const data = {
-            name: "Random",
-            laeder: "Name 1",
-            pieceworker: [],
-            detail: "",
-            createdAt: "04/11/2022",
-            resolvedAt: "",
-            resolved: false,
-        }
-
-        // @ts-ignore
-        delete data?.uid
+        const data = incidents.find(({ uid }) => uid == id)
 
         res.json({
             ...response_success,
