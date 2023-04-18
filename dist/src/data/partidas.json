@@ -1,0 +1,92 @@
+{
+    "list": [
+        {
+            "uid": "partida_1",
+            "name": "OC - LC Obra civil",
+            "groups": [
+                { "uid": "oc_1", "name": "Recepción y urbanización" },
+                { "uid": "oc_2", "name": "Preliminares" },
+                { "uid": "oc_3", "name": "Cimentación" },
+                { "uid": "oc_4", "name": "Entronque" }
+            ]
+        },
+        {
+            "uid": "partida_2",
+            "name": "Acabados",
+            "groups": [
+                { "uid": "ac_1", "name": "Recepción de obra civil" },
+                { "uid": "ac_2", "name": "Acabado exterior y fachada" }
+            ]
+        },
+        {
+            "uid": "partida_3",
+            "name": "CT",
+            "groups": [
+                { "uid": "ct_1", "name": "Recepcion acabados y CT" },
+                { "uid": "ct_2", "name": "Lijado de yeso" }
+            ]
+        },
+        {
+            "uid": "partida_4",
+            "name": "Entregas",
+            "groups": [
+                { "uid": "en_1", "name": "Recepción CT" },
+                { "uid": "en_2", "name": "Previa entrega de vivienda" }
+            ]
+        }
+    ],
+    "detail": [
+        {
+            "uid": "oc_1",
+            "list": [
+                "Puntos",
+                "Nivel de plataforma",
+                "Pruebas de plataforma",
+                "Ventilas visibles",
+                "Murete prefabricado"
+            ]
+        },
+        {
+            "uid": "oc_2",
+            "list": ["Perfilado y limpieza"]
+        },
+        {
+            "uid": "oc_3",
+            "list": [
+                "Trazo y nivelación",
+                "Excavación manual losa de cimentación",
+                "Colocación de cimbra perimetral",
+                "Instalación de plomería en firme",
+                "Acero en losa de cimentación"
+            ]
+        },
+        {
+            "uid": "oc_4",
+            "list": ["Entronque"]
+        },
+        {
+            "uid": "ac_1",
+            "list": ["Libre de cimbras", "Libre de rebajes"]
+        },
+        {
+            "uid": "ac_2",
+            "list": ["Elaboración de pretil en fachada", "Filetes de mezcla en ventanas"]
+        },
+        {
+            "uid": "ct_1",
+            "list": ["Acabado exterior y fachada", "Azulejo"]
+        },
+        {
+            "uid": "ct_2",
+            "list": ["Lijado en muros de yeso"]
+        },
+        {
+            "uid": "en_1",
+            "list": ["Accesorios eléctricos"]
+        },
+        {
+            "uid": "en_2",
+            "list": ["Instalación de número oficial"]
+        }
+    ]
+}
