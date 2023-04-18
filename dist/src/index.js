@@ -17,6 +17,8 @@ const plane_1 = __importDefault(require("./routes/plane"));
 const users_1 = __importDefault(require("./routes/users"));
 const plots_1 = __importDefault(require("./routes/plots"));
 const checklist_1 = __importDefault(require("./routes/checklist"));
+const incidents_1 = __importDefault(require("./routes/incidents"));
+const pieceworker_1 = __importDefault(require("./routes/pieceworker"));
 const app = (0, express_1.default)();
 const apiRouter = express_1.default.Router();
 const server = new http_1.default.Server(app);
@@ -38,6 +40,8 @@ apiRouter.use("/plane", plane_1.default);
 apiRouter.use("/users", users_1.default);
 apiRouter.use("/plots", plots_1.default);
 apiRouter.use("/checklist", checklist_1.default);
+apiRouter.use("/incidents", incidents_1.default);
+apiRouter.use("/pieceworker", pieceworker_1.default);
 const host = process.env.HOST || "0.0.0.0";
 const port = Number(process.env.PORT) || 5000;
 server.listen(port, host, () => {

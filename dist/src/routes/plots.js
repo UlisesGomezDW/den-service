@@ -20,9 +20,9 @@ const getPlots = (blocks) => {
         const blockIndex = (block === null || block === void 0 ? void 0 : block.number) || 1;
         return plots === null || plots === void 0 ? void 0 : plots.map((plotId, index) => {
             const plot = plots_json_1.default.find(({ uid }) => uid === plotId);
-            if (plot)
-                delete plot.groups;
-            return Object.assign(Object.assign({}, plot), { name: (0, string_1.getPlotName)(blockIndex, index + 1), incidents: index === 2 ? 2 : 0, finishedDate: (plot === null || plot === void 0 ? void 0 : plot.finishedDate) ? (0, date_1.getDateString)(plot === null || plot === void 0 ? void 0 : plot.finishedDate, true) : "" });
+            // @ts-ignore
+            delete plot.groups;
+            return Object.assign(Object.assign({}, plot), { name: (0, string_1.getPlotName)(blockIndex, index + 1), incidents: index === 2 ? 2 : 0, finishDate: (plot === null || plot === void 0 ? void 0 : plot.finishDate) ? (0, date_1.getDateString)(plot === null || plot === void 0 ? void 0 : plot.finishDate, true) : "" });
         });
     });
     return array.flat(1);
@@ -39,6 +39,24 @@ router.get("/", (req, res) => {
         else {
             const data = plane_json_1.default.map(({ blocks }) => getPlots(blocks));
             res.json(Object.assign(Object.assign({}, constants_1.response_success), { data: data.flat() })).status(200);
+        }
+    }
+    catch (err) {
+        console.error(err);
+        res.json(Object.assign(Object.assign({}, constants_1.response_error), { message: err === null || err === void 0 ? void 0 : err.message }));
+    }
+});
+router.post("/validation", (req, res) => {
+    const { plots = [], comments = "" } = req.body;
+    try {
+        if (Object.values(req.body).length > 0) {
+            res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success", data: {
+                    plots,
+                    comments,
+                } })).status(200);
+        }
+        else {
+            res.json(Object.assign(Object.assign({}, constants_1.response_error), { message: "not data" }));
         }
     }
     catch (err) {

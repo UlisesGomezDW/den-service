@@ -13,6 +13,8 @@ import planeRouter from "./routes/plane"
 import usersRouter from "./routes/users"
 import plotsRouter from "./routes/plots"
 import checklistRouter from "./routes/checklist"
+import incidentsRouter from "./routes/incidents"
+import pieceworkerRouter from "./routes/pieceworker"
 
 const app: Express = express()
 const apiRouter = express.Router()
@@ -36,6 +38,8 @@ apiRouter.use("/plane", planeRouter)
 apiRouter.use("/users", usersRouter)
 apiRouter.use("/plots", plotsRouter)
 apiRouter.use("/checklist", checklistRouter)
+apiRouter.use("/incidents", incidentsRouter)
+apiRouter.use("/pieceworker", pieceworkerRouter)
 
 const host = process.env.HOST || "0.0.0.0"
 const port = Number(process.env.PORT) || 5000

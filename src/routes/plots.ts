@@ -7,15 +7,6 @@ import plotsData from "../data/plots.json"
 import { getPlotName } from "../utils/string"
 import { getDateString } from "../utils/date"
 
-type Plot = {
-    uid: string
-    model: string
-    status: string
-    progress: number
-    groups?: string[]
-    finishedDate: string
-}
-
 const router = Router()
 
 router.use(authMiddleware)
@@ -26,13 +17,14 @@ const getPlots = (blocks: string[]) => {
         const plots = block?.plots
         const blockIndex = block?.number || 1
         return plots?.map((plotId, index) => {
-            const plot: Plot | undefined = plotsData.find(({ uid }) => uid === plotId)
-            if (plot) delete plot.groups
+            const plot = plotsData.find(({ uid }) => uid === plotId)
+            // @ts-ignore
+            delete plot.groups
             return {
                 ...plot,
                 name: getPlotName(blockIndex, index + 1),
                 incidents: index === 2 ? 2 : 0,
-                finishedDate: plot?.finishedDate ? getDateString(plot?.finishedDate, true) : "",
+                finishDate: plot?.finishDate ? getDateString(plot?.finishDate, true) : "",
             }
         })
     })
@@ -55,6 +47,27 @@ router.get("/", (req: Request, res: Response) => {
                 ...response_success,
                 data: data.flat(),
             }).status(200)
+        }
+    } catch (err: any) {
+        console.error(err)
+        res.json({ ...response_error, message: err?.message })
+    }
+})
+
+router.post("/validation", (req: Request, res: Response) => {
+    const { plots = [], comments = "" } = req.body
+    try {
+        if (Object.values(req.body).length > 0) {
+            res.json({
+                ...response_success,
+                message: "success",
+                data: {
+                    plots,
+                    comments,
+                },
+            }).status(200)
+        } else {
+            res.json({ ...response_error, message: "not data" })
         }
     } catch (err: any) {
         console.error(err)

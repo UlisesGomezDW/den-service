@@ -5,7 +5,7 @@
         "status": "to-do",
         "progress": 0,
         "partida": "partida_1",
-        "finishedDate": ""
+        "finishDate": ""
     },
     {
         "uid": "plot_2",
@@ -13,7 +13,7 @@
         "status": "in-progress",
         "progress": 50,
         "partida": "partida_2",
-        "finishedDate": ""
+        "finishDate": ""
     },
     {
         "uid": "plot_3",
@@ -21,7 +21,7 @@
         "status": "in-progress",
         "progress": 50,
         "partida": "partida_3",
-        "finishedDate": ""
+        "finishDate": ""
     },
     {
         "uid": "plot_4",
@@ -29,6 +29,6 @@
         "status": "finished",
         "progress": 100,
         "partida": "partida_4",
-        "finishedDate": "2023-04-17T21:11:33.505Z"
+        "finishDate": "2023-04-17T21:11:33.505Z"
     }
 ]

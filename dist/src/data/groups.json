@@ -2,36 +2,41 @@
     {
         "uid": "group_1",
         "progress": 50,
-        "piecework": ["piecework_1", "piecework_2", "piecework_3", "piecework_4", "piecework_5"],
+        "pieceworks": ["piecework_1", "piecework_2", "piecework_3", "piecework_4", "piecework_5"],
         "startDate": "2021-10-05T14:48:00.000Z",
-        "finishedDate": "2022-04-30T14:48:00.000Z"
+        "finishDate": "2022-04-30T14:48:00.000Z",
+        "completed": false
     },
     {
         "uid": "group_2",
         "progress": 70,
-        "piecework": ["piecework_1"],
+        "pieceworks": ["piecework_1"],
         "startDate": "2022-01-01T14:48:00.000Z",
-        "finishedDate": "2022-11-24T14:48:00.000Z"
+        "finishDate": "2022-11-24T14:48:00.000Z",
+        "completed": false
     },
     {
         "uid": "group_3",
         "progress": 20,
-        "piecework": ["piecework_1", "piecework_2"],
+        "pieceworks": ["piecework_1", "piecework_2"],
         "startDate": "2021-05-15T14:48:00.000Z",
-        "finishedDate": "2022-05-02T14:48:00.000Z"
+        "finishDate": "2022-05-02T14:48:00.000Z",
+        "completed": false
     },
     {
         "uid": "group_4",
-        "progress": 80,
-        "piecework": ["piecework_1", "piecework_2", "piecework_3", "piecework_4"],
+        "progress": 100,
+        "pieceworks": ["piecework_1", "piecework_2", "piecework_3", "piecework_4"],
         "startDate": "2020-10-15T14:48:00.000Z",
-        "finishedDate": "2022-08-22T14:48:00.000Z"
+        "finishDate": "2022-08-22T14:48:00.000Z",
+        "completed": true
     },
     {
         "uid": "group_5",
         "progress": 10,
-        "piecework": ["piecework_1", "piecework_2", "piecework_3"],
+        "pieceworks": ["piecework_1", "piecework_2", "piecework_3"],
         "startDate": "2022-02-19T14:48:00.000Z",
-        "finishedDate": "2022-09-09T14:48:00.000Z"
+        "finishDate": "2022-09-09T14:48:00.000Z",
+        "completed": false
     }
 ]

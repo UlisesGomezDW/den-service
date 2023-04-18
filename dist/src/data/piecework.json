@@ -3,50 +3,50 @@
         "uid": "piecework_1",
         "name": "piecework01",
         "status": "to-do",
-        "incident": ["incident_1", "incident_2", "incident_3", "incident_4", "incident_5"],
+        "incidents": ["incident_1", "incident_2", "incident_3", "incident_4", "incident_5"],
         "startDate": "2021-10-05T14:48:00.000Z",
-        "deadline": "2022-04-30T14:48:00.000Z",
+        "finishDate": "2022-04-30T14:48:00.000Z",
         "pending": true,
-        "task": ["task_1", "task_2", "task_3", "task_4", "task_5"]
+        "tasks": ["task_1", "task_2", "task_3", "task_4", "task_5"]
     },
     {
         "uid": "piecework_2",
         "name": "piecework02",
-        "status": "in-process",
-        "incident": ["incident_1"],
+        "status": "in-progress",
+        "incidents": ["incident_1"],
         "startDate": "2022-02-19T14:48:00.000Z",
-        "deadline": "2022-09-09T14:48:00.000Z",
+        "finishDate": "2022-09-09T14:48:00.000Z",
         "pending": false,
-        "task": ["task_1", "task_2", "task_3"]
+        "tasks": ["task_1", "task_2", "task_3"]
     },
     {
         "uid": "piecework_3",
         "name": "piecework03",
-        "status": "incidents",
-        "incident": ["incident_1", "incident_2", "incident_3"],
+        "status": "in-progress",
+        "incidents": ["incident_1", "incident_2", "incident_3"],
         "startDate": "2020-10-15T14:48:00.000Z",
-        "deadline": "2022-08-22T14:48:00.000Z",
+        "finishDate": "2022-08-22T14:48:00.000Z",
         "pending": false,
-        "task": ["task_1", "task_2"]
+        "tasks": ["task_1", "task_2"]
     },
     {
         "uid": "piecework_4",
         "name": "piecework04",
         "status": "finished",
-        "incident": ["incident_1", "incident_2", "incident_3", "incident_4"],
+        "incidents": ["incident_1", "incident_2", "incident_3", "incident_4"],
         "startDate": "2021-05-15T14:48:00.000Z",
-        "deadline": "2022-05-02T14:48:00.000Z",
+        "finishDate": "2022-05-02T14:48:00.000Z",
         "pending": true,
-        "task": ["task_1", "task_2", "task_3", "task_4"]
+        "tasks": ["task_1", "task_2", "task_3", "task_4"]
     },
     {
         "uid": "piecework_5",
         "name": "piecework05",
         "status": "to-do",
-        "incident": ["incident_1", "incident_2"],
+        "incidents": ["incident_1", "incident_2"],
         "startDate": "2022-01-01T14:48:00.000Z",
-        "deadline": "2022-11-24T14:48:00.000Z",
+        "finishDate": "2022-11-24T14:48:00.000Z",
         "pending": true,
-        "task": ["task_1", "task_2"]
+        "tasks": ["task_1", "task_2"]
     }
 ]
