@@ -50,7 +50,7 @@ router.post("/validation", (req, res) => {
     const { plots = [], comments = "" } = req.body;
     try {
         if (Object.values(req.body).length > 0) {
-            res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success", data: {
+            res.json(Object.assign(Object.assign({}, constants_1.response_success), { data: {
                     plots,
                     comments,
                 } })).status(200);

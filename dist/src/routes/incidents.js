@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const constants_1 = require("../constants");
 const middleware_1 = require("../middleware");
+const incidents_json_1 = __importDefault(require("../data/incidents.json"));
 const router = (0, express_1.Router)();
 router.use(middleware_1.authMiddleware);
 router.post("/", (req, res) => {
@@ -26,10 +30,11 @@ router.post("/", (req, res) => {
     }
 });
 router.post("/solution", (req, res) => {
-    const { photos = [], detail = "" } = req.body;
+    const { photos = [], detail = "", incidentId = "" } = req.body;
     try {
         if (Object.values(req.body).length > 0) {
             res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success", data: {
+                    incidentId,
                     photos,
                     detail,
                 } })).status(200);
@@ -46,17 +51,7 @@ router.post("/solution", (req, res) => {
 router.get("/:id", (req, res) => {
     const { id } = req.params;
     try {
-        const data = {
-            name: "Random",
-            laeder: "Name 1",
-            pieceworker: [],
-            detail: "",
-            createdAt: "04/11/2022",
-            resolvedAt: "",
-            resolved: false,
-        };
-        // @ts-ignore
-        data === null || data === void 0 ? true : delete data.uid;
+        const data = incidents_json_1.default.find(({ uid }) => uid == id);
         res.json(Object.assign(Object.assign({}, constants_1.response_success), { data })).status(200);
     }
     catch (err) {

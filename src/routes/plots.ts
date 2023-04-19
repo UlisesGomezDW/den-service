@@ -60,7 +60,6 @@ router.post("/validation", (req: Request, res: Response) => {
         if (Object.values(req.body).length > 0) {
             res.json({
                 ...response_success,
-                message: "success",
                 data: {
                     plots,
                     comments,
