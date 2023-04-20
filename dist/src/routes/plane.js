@@ -8,7 +8,10 @@ const constants_1 = require("../constants");
 const middleware_1 = require("../middleware");
 const plane_services_1 = require("../services/plane.services");
 const plots_json_1 = __importDefault(require("../data/plots.json"));
+const plane_json_1 = __importDefault(require("../data/plane.json"));
 const filter_1 = require("../utils/filter");
+const plot_service_1 = require("../services/plot.service");
+const number_1 = require("../utils/number");
 const router = (0, express_1.Router)();
 router.use(middleware_1.authMiddleware);
 const getPlot = (array) => array.map(({ uid, status, progress, model }, index) => {
@@ -54,22 +57,20 @@ router.get("/totals/:id", (req, res) => {
     var _a;
     const { id } = req.params;
     try {
-        const planes = (0, plane_services_1.getAllPlanes)();
-        const consult = (_a = planes.find(({ uid }) => uid == id)) === null || _a === void 0 ? void 0 : _a.blocks;
-        const blocks = consult === null || consult === void 0 ? void 0 : consult.map(({ plots }) => plots);
-        const allPlots = (blocks === null || blocks === void 0 ? void 0 : blocks.flat(1).map((plotId) => {
-            const plot = plots_json_1.default.find(({ uid }) => plotId === uid);
-            return {
-                status: plot === null || plot === void 0 ? void 0 : plot.status,
-            };
-        })) || [];
-        const data = {
+        const blocks = ((_a = plane_json_1.default.find(({ uid }) => uid == id)) === null || _a === void 0 ? void 0 : _a.blocks) || [];
+        const allPlots = (0, plot_service_1.getPlotsByBlocks)(blocks);
+        const incidents = allPlots.filter((plot) => (plot === null || plot === void 0 ? void 0 : plot.incidents) && (plot === null || plot === void 0 ? void 0 : plot.incidents.length) > 0);
+        const subtotals = {
             toDo: (0, filter_1.getNumberOfElements)(allPlots, "to-do"),
             inProgress: (0, filter_1.getNumberOfElements)(allPlots, "in-progress"),
             finished: (0, filter_1.getNumberOfElements)(allPlots, "finished"),
-            incidents: 0,
         };
-        res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data })).status(200);
+        const progress = (0, number_1.getProgress)(subtotals) || 0;
+        const totals = Object.assign(Object.assign({}, subtotals), { incidents: incidents.length });
+        res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data: {
+                totals,
+                progress,
+            } })).status(200);
     }
     catch (err) {
         console.error(err);

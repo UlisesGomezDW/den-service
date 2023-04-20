@@ -18,7 +18,7 @@ function getCheklist(groupId) {
     const data = Object.assign(Object.assign({}, group), { startDate: (0, date_1.getDateString)((group === null || group === void 0 ? void 0 : group.startDate) || ""), finishDate: (0, date_1.getDateString)((group === null || group === void 0 ? void 0 : group.finishDate) || "") });
     const pieceworkList = (detail === null || detail === void 0 ? void 0 : detail.list.map((key, index) => {
         let item = piecework_json_1.default[index];
-        return Object.assign(Object.assign({}, item), { name: key, editable: true, incidents: (0, pieceworker_services_1.getInicidets)(item.incidents), tasks: [], startDate: (0, date_1.getDateString)(item.startDate), finishDate: (0, date_1.getDateString)(item.finishDate) });
+        return Object.assign(Object.assign({}, item), { name: key, editable: true, incidents: item.status === "in-progress" ? (0, pieceworker_services_1.getInicidets)(item.incidents) : [], tasks: [], startDate: (0, date_1.getDateString)(item.startDate), finishDate: (0, date_1.getDateString)(item.finishDate) });
     })) || [];
     const incidents = pieceworkList.filter(({ incidents }) => incidents.length > 0).length;
     const subtotals = {

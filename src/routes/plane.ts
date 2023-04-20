@@ -3,7 +3,10 @@ import { response_error, response_success } from "../constants"
 import { authMiddleware } from "../middleware"
 import { getAllPlanes } from "../services/plane.services"
 import plots from "../data/plots.json"
+import planes from "../data/plane.json"
 import { getNumberOfElements } from "../utils/filter"
+import { getPlotsByBlocks } from "../services/plot.service"
+import { getProgress } from "../utils/number"
 
 const router = Router()
 
@@ -60,27 +63,29 @@ router.get("/totals/:id", (req: Request, res: Response) => {
     const { id } = req.params
 
     try {
-        const planes = getAllPlanes()
-        const consult = planes.find(({ uid }) => uid == id)?.blocks
-        const blocks = consult?.map(({ plots }) => plots)
-        const allPlots =
-            blocks?.flat(1).map((plotId) => {
-                const plot = plots.find(({ uid }) => plotId === uid)
-                return {
-                    status: plot?.status,
-                }
-            }) || []
-
-        const data = {
+        const blocks = planes.find(({ uid }) => uid == id)?.blocks || []
+        const allPlots = getPlotsByBlocks(blocks)
+        const incidents = allPlots.filter((plot) => plot?.incidents && plot?.incidents.length > 0)
+        const subtotals = {
             toDo: getNumberOfElements(allPlots, "to-do"),
             inProgress: getNumberOfElements(allPlots, "in-progress"),
             finished: getNumberOfElements(allPlots, "finished"),
-            incidents: 0,
         }
+
+        const progress = getProgress(subtotals) || 0
+
+        const totals = {
+            ...subtotals,
+            incidents: incidents.length,
+        }
+
         res.json({
             ...response_success,
             message: "success data",
-            data,
+            data: {
+                totals,
+                progress,
+            },
         }).status(200)
     } catch (err: any) {
         console.error(err)

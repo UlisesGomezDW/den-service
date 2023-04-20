@@ -22,7 +22,7 @@ export function getCheklist(groupId: string) {
                 ...item,
                 name: key,
                 editable: true,
-                incidents: getInicidets(item.incidents),
+                incidents: item.status === "in-progress" ? getInicidets(item.incidents) : [],
                 tasks: [],
                 startDate: getDateString(item.startDate),
                 finishDate: getDateString(item.finishDate),
