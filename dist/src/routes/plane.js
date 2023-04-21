@@ -8,10 +8,6 @@ const constants_1 = require("../constants");
 const middleware_1 = require("../middleware");
 const plane_services_1 = require("../services/plane.services");
 const plots_json_1 = __importDefault(require("../data/plots.json"));
-const plane_json_1 = __importDefault(require("../data/plane.json"));
-const filter_1 = require("../utils/filter");
-const plot_service_1 = require("../services/plot.service");
-const number_1 = require("../utils/number");
 const router = (0, express_1.Router)();
 router.use(middleware_1.authMiddleware);
 const getPlot = (array) => array.map(({ uid, status, progress, model }, index) => {
@@ -44,7 +40,9 @@ router.get("/", (req, res) => {
             res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data })).status(200);
         }
         else {
-            const data = (0, plane_services_1.getAllPlanes)();
+            const data = (0, plane_services_1.getAllPlanes)().map((plane) => {
+                return Object.assign(Object.assign({}, plane), { totals: (0, plane_services_1.getTotals)(plane.uid) });
+            });
             res.json(Object.assign(Object.assign({}, constants_1.response_success), { data })).status(200);
         }
     }
@@ -54,23 +52,15 @@ router.get("/", (req, res) => {
     }
 });
 router.get("/totals/:id", (req, res) => {
-    var _a;
     const { id } = req.params;
     try {
-        const blocks = ((_a = plane_json_1.default.find(({ uid }) => uid == id)) === null || _a === void 0 ? void 0 : _a.blocks) || [];
-        const allPlots = (0, plot_service_1.getPlotsByBlocks)(blocks);
-        const incidents = allPlots.filter((plot) => (plot === null || plot === void 0 ? void 0 : plot.incidents) && (plot === null || plot === void 0 ? void 0 : plot.incidents.length) > 0);
-        const subtotals = {
-            toDo: (0, filter_1.getNumberOfElements)(allPlots, "to-do"),
-            inProgress: (0, filter_1.getNumberOfElements)(allPlots, "in-progress"),
-            finished: (0, filter_1.getNumberOfElements)(allPlots, "finished"),
-        };
-        const progress = (0, number_1.getProgress)(subtotals) || 0;
-        const totals = Object.assign(Object.assign({}, subtotals), { incidents: incidents.length });
-        res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data: {
-                totals,
-                progress,
-            } })).status(200);
+        if (id) {
+            const data = (0, plane_services_1.getTotals)(`${id}`);
+            res.json(Object.assign(Object.assign({}, constants_1.response_success), { data })).status(200);
+        }
+        else {
+            res.json(Object.assign(Object.assign({}, constants_1.response_error), { message: "Not id" })).status(400);
+        }
     }
     catch (err) {
         console.error(err);

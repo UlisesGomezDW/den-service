@@ -3,6 +3,7 @@ import { response_error, response_success } from "../constants"
 import { authMiddleware } from "../middleware"
 import { getPlotById, getPlotsByBlocks } from "../services/plot.service"
 import plane from "../data/plane.json"
+import plots from "../data/plots.json"
 
 const router = Router()
 
@@ -26,7 +27,7 @@ router.get("/", (req: Request, res: Response) => {
                 data,
             }).status(200)
         } else {
-            const data = plane.map(({ blocks }) => getPlotsByBlocks(blocks))
+            const data = plots.map(({ uid }) => getPlotById(uid, { blockIndex: 1, index: 1 }))
             res.json({
                 ...response_success,
                 data: data.flat(),

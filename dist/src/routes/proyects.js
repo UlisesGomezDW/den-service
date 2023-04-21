@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
                     };
                 }) });
         });
-        res.json(Object.assign(Object.assign({}, constants_1.response_success), { message: "success data", data })).status(200);
+        res.json(Object.assign(Object.assign({}, constants_1.response_success), { data })).status(200);
     }
     catch (err) {
         console.error(err);

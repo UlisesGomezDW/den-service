@@ -8,6 +8,7 @@ const constants_1 = require("../constants");
 const middleware_1 = require("../middleware");
 const plot_service_1 = require("../services/plot.service");
 const plane_json_1 = __importDefault(require("../data/plane.json"));
+const plots_json_1 = __importDefault(require("../data/plots.json"));
 const router = (0, express_1.Router)();
 router.use(middleware_1.authMiddleware);
 router.get("/", (req, res) => {
@@ -25,7 +26,7 @@ router.get("/", (req, res) => {
             res.json(Object.assign(Object.assign({}, constants_1.response_success), { data })).status(200);
         }
         else {
-            const data = plane_json_1.default.map(({ blocks }) => (0, plot_service_1.getPlotsByBlocks)(blocks));
+            const data = plots_json_1.default.map(({ uid }) => (0, plot_service_1.getPlotById)(uid, { blockIndex: 1, index: 1 }));
             res.json(Object.assign(Object.assign({}, constants_1.response_success), { data: data.flat() })).status(200);
         }
     }

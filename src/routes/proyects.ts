@@ -24,7 +24,6 @@ router.get("/", (req: Request, res: Response) => {
         })
         res.json({
             ...response_success,
-            message: "success data",
             data,
         }).status(200)
     } catch (err: any) {

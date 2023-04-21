@@ -1,12 +1,8 @@
 import { Router, Request, Response } from "express"
 import { response_error, response_success } from "../constants"
 import { authMiddleware } from "../middleware"
-import { getAllPlanes } from "../services/plane.services"
+import { getAllPlanes, getTotals } from "../services/plane.services"
 import plots from "../data/plots.json"
-import planes from "../data/plane.json"
-import { getNumberOfElements } from "../utils/filter"
-import { getPlotsByBlocks } from "../services/plot.service"
-import { getProgress } from "../utils/number"
 
 const router = Router()
 
@@ -47,7 +43,12 @@ router.get("/", (req: Request, res: Response) => {
                 data,
             }).status(200)
         } else {
-            const data = getAllPlanes()
+            const data = getAllPlanes().map((plane) => {
+                return {
+                    ...plane,
+                    totals: getTotals(plane.uid),
+                }
+            })
             res.json({
                 ...response_success,
                 data,
@@ -63,30 +64,18 @@ router.get("/totals/:id", (req: Request, res: Response) => {
     const { id } = req.params
 
     try {
-        const blocks = planes.find(({ uid }) => uid == id)?.blocks || []
-        const allPlots = getPlotsByBlocks(blocks)
-        const incidents = allPlots.filter((plot) => plot?.incidents && plot?.incidents.length > 0)
-        const subtotals = {
-            toDo: getNumberOfElements(allPlots, "to-do"),
-            inProgress: getNumberOfElements(allPlots, "in-progress"),
-            finished: getNumberOfElements(allPlots, "finished"),
+        if (id) {
+            const data = getTotals(`${id}`)
+            res.json({
+                ...response_success,
+                data,
+            }).status(200)
+        } else {
+            res.json({
+                ...response_error,
+                message: "Not id",
+            }).status(400)
         }
-
-        const progress = getProgress(subtotals) || 0
-
-        const totals = {
-            ...subtotals,
-            incidents: incidents.length,
-        }
-
-        res.json({
-            ...response_success,
-            message: "success data",
-            data: {
-                totals,
-                progress,
-            },
-        }).status(200)
     } catch (err: any) {
         console.error(err)
         res.json({ ...response_error, message: err?.message })
