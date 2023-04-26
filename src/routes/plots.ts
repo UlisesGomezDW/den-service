@@ -1,9 +1,8 @@
 import { Router, Request, Response } from "express"
 import { response_error, response_success } from "../constants"
 import { authMiddleware } from "../middleware"
-import { getPlotById, getPlotsByBlocks } from "../services/plot.service"
-import plane from "../data/plane.json"
-import plots from "../data/plots.json"
+import { getPlotById, getPlotsIdByPlane } from "../services/plot.service"
+import { getAllPlanes } from "../services/plane.services"
 
 const router = Router()
 
@@ -14,23 +13,33 @@ router.get("/", (req: Request, res: Response) => {
         const planeId = req.query.planeId || ""
         const plotId = req.query.plotId || ""
         if (planeId) {
-            const blocks: any[] = plane.find(({ uid }) => uid === planeId)?.blocks || []
-            const blockList = getPlotsByBlocks(blocks)
+            const keys: any[] = getPlotsIdByPlane(`${planeId}`)
+            const data = keys?.map((id = "") => {
+                return getPlotById(id)
+            })
             res.json({
                 ...response_success,
-                data: blockList,
+                data,
             }).status(200)
         } else if (plotId) {
-            const data = getPlotById(`${plotId}`, { blockIndex: 1, index: 1 })
+            const data = getPlotById(`${plotId}`)
             res.json({
                 ...response_success,
                 data,
             }).status(200)
         } else {
-            const data = plots.map(({ uid }) => getPlotById(uid, { blockIndex: 1, index: 1 }))
+            const plotKeys =
+                getAllPlanes()
+                    .map(({ uid }) => {
+                        return getPlotsIdByPlane(uid)
+                    })
+                    .flat(1) || []
+            const data = plotKeys?.map((id = "") => {
+                return getPlotById(id)
+            })
             res.json({
                 ...response_success,
-                data: data.flat(),
+                data: data.flat(1),
             }).status(200)
         }
     } catch (err: any) {

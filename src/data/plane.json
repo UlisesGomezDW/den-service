@@ -2,26 +2,31 @@
     {
         "uid": "plane_1",
         "streets": ["street_1"],
-        "blocks": ["block_1", "block_2", "block_3"]
+        "blocks": ["block_1", "block_2", "block_3"],
+        "area": "obra"
     },
     {
         "uid": "plane_2",
         "streets": ["street_1"],
-        "blocks": ["block_4", "block_5"]
+        "blocks": ["block_4", "block_5"],
+        "area": "acabados"
     },
     {
         "uid": "plane_3",
         "streets": ["street_1"],
-        "blocks": ["block_2", "block_3"]
+        "blocks": ["block_2", "block_3"],
+        "area": "ct"
     },
     {
         "uid": "plane_4",
         "streets": ["street_1"],
-        "blocks": ["block_1", "block_3"]
+        "blocks": ["block_1", "block_3"],
+        "area": "entregas"
     },
     {
         "uid": "plane_5",
         "streets": ["street_1"],
-        "blocks": ["block_1", "block_3", "block_4"]
+        "blocks": ["block_1", "block_3", "block_4"],
+        "area": "ct"
     }
 ]

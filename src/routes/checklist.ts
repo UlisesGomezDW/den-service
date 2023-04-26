@@ -1,26 +1,42 @@
 import { Router, Request, Response } from "express"
 import { response_error, response_success } from "../constants"
 import { authMiddleware } from "../middleware"
-
-import partidas from "../data/partidas.json"
-import { getCheklist } from "../services/checklist.service"
+import lista from "../data/lista.json"
+import { getBatchList, getCheklist } from "../services/checklist.service"
+import { getAllPlanes } from "../services/plane.services"
+import { getId } from "../utils/string"
 
 const router = Router()
 
 router.use(authMiddleware)
 
-router.get("/partidas/:id", (req: Request, res: Response) => {
-    const { id } = req.params
+router.get("/batch", (req: Request, res: Response) => {
     try {
-        const data = partidas.list.find(({ uid }) => uid === id)
+        const planeId = req.query.planeId || ""
+        if (planeId) {
+            const data = getBatchList(`${planeId}`)
+            res.json({
+                ...response_success,
+                data,
+            }).status(200)
+        } else {
+            const collection = Object.values(lista).map((value) =>
+                value.map(({ uid, name }) => {
+                    return {
+                        name,
+                        ref: uid,
+                    }
+                })
+            )
+            const data = Object.keys(lista).reduce((obj, key, index) => {
+                return { ...obj, [key]: collection[index] }
+            }, {})
 
-        // @ts-ignore
-        delete data?.uid
-
-        res.json({
-            ...response_success,
-            data,
-        }).status(200)
+            res.json({
+                ...response_success,
+                data: data,
+            }).status(200)
+        }
     } catch (err: any) {
         console.error(err)
         res.json({ ...response_error, message: err?.message })
@@ -29,23 +45,42 @@ router.get("/partidas/:id", (req: Request, res: Response) => {
 
 router.get("/", (req: Request, res: Response) => {
     try {
-        const groupId = req.query.groupId || ""
-        if (groupId) {
-            const data = getCheklist(groupId.toString())
+        const plotId = req.query?.plotId || ""
+        const ref = req.query?.ref || ""
+        if (plotId && plotId) {
+            const [planeId, mz, plotID] = getId(`${plotId}`)
+            const data = getCheklist(`${planeId}`, `${plotID}`, `${ref}`)
             res.json({
                 ...response_success,
                 data,
             }).status(200)
         } else {
-            const data = partidas.list.map(({ uid, groups }) => {
-                return {
-                    uid,
-                    groups: groups.map(({ uid }) => getCheklist(uid)),
-                }
+            const plotsArray = getAllPlanes()
+                .map(({ uid, blocks }) => {
+                    const plots = blocks.map(({ plots }) => {
+                        return plots?.map((plotId) => {
+                            return uid + "-" + plotId
+                        })
+                    })
+
+                    return plots
+                })
+                .flat(2)
+
+            const data = [...new Set(plotsArray)].map((key = "") => {
+                const path = key.split("-")
+                const planeId = path[0]
+                const plotId = path[1]
+
+                const list = getBatchList(planeId).map(({ ref }) => ref)
+
+                return list.map((ref) => {
+                    return getCheklist(planeId, plotId, ref)
+                })
             })
             res.json({
                 ...response_success,
-                data,
+                data: [...new Set(data)],
             }).status(200)
         }
     } catch (err: any) {

@@ -1,9 +1,9 @@
 import plotsData from "../data/plots.json"
-import partidasData from "../data/partidas.json"
 import blocksData from "../data/blocks.json"
-import { getPlotName } from "../utils/string"
+import { getAllPlanes } from "../services/plane.services"
+import { getId, getNumberKey, getPlotName } from "../utils/string"
 import { getDateString } from "../utils/date"
-import { getCheklist } from "../services/checklist.service"
+import { getBatchList, getCheklist } from "../services/checklist.service"
 
 export const getPlotsByBlocks = (blocks: string[]) => {
     const array = blocks?.map((blockId) => {
@@ -11,20 +11,34 @@ export const getPlotsByBlocks = (blocks: string[]) => {
         const plots = block?.plots
         const blockIndex = block?.number || 1
         return plots?.map((plotId, index) => {
-            return getPlotById(plotId, { blockIndex, index: index + 1 })
+            return getPlotById(plotId)
         })
     })
     return array.flat(1)
 }
 
-export function getPlotById(plotId: string, { blockIndex = 1, index = 1 }) {
-    const plot = plotsData.find(({ uid }) => uid === plotId)
+export function getPlotsIdByPlane(planeId: string) {
+    const plane = getAllPlanes().find(({ uid }) => planeId === uid)
+    const plots =
+        plane?.blocks?.map(({ plots, number }) => {
+            return plots?.map((plotId) => {
+                return `${plane.uid}-mz_${number}-${plotId}`
+            })
+        }) || []
 
-    const partidas = partidasData.list.find(({ uid }) => uid === plot?.partida)?.groups
+    const clear = plots.flat(1)
+    return [...new Set(clear)]
+}
+
+export function getPlotById(plotId: string) {
+    const [planeId, mzId, plotUID] = getId(plotId)
+    const plot = plotsData.find(({ uid }) => uid === plotUID)
+
+    const area = getBatchList(planeId)
     const incidents =
-        partidas
-            ?.filter(({ uid }) => {
-                return getCheklist(uid).pieceworks.map(({ incidents }) => {
+        area
+            .map(({ ref }) => {
+                return getCheklist(planeId, plotUID, ref).pieceworks.map(({ incidents }) => {
                     return incidents
                 })
             })
@@ -32,7 +46,8 @@ export function getPlotById(plotId: string, { blockIndex = 1, index = 1 }) {
 
     return {
         ...plot,
-        name: getPlotName(blockIndex, index),
+        uid: plotId,
+        name: getPlotName(getNumberKey(mzId), getNumberKey(plotUID)),
         finishDate: plot?.finishDate ? getDateString(plot?.finishDate, true) : "",
         incidents: plot?.status === "in-progress" ? incidents : [],
     }

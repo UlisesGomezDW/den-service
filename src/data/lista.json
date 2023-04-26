@@ -1,0 +1,68 @@
+{
+    "obra": [
+        {
+            "uid": "ob_1",
+            "name": "Recepción y urbanización",
+            "items": [
+                "Puntos",
+                "Nivel de plataforma",
+                "Pruebas de plataforma",
+                "Ventilas visibles",
+                "Murete prefabricado"
+            ]
+        },
+        {
+            "uid": "ob_2",
+            "name": "Preliminares",
+            "items": ["Perfilado y limpieza"]
+        },
+        {
+            "uid": "ob_3",
+            "name": "Cimentación",
+            "items": [
+                "Trazo y nivelación",
+                "Excavación manual losa de cimentación",
+                "Colocación de cimbra perimetral",
+                "Instalación de plomería en firme",
+                "Acero en losa de cimentación"
+            ]
+        },
+        {
+            "uid": "ob_4",
+            "name": "Entronque",
+            "items": ["Conexión de drenaje"]
+        }
+    ],
+    "acabados": [
+        {
+            "uid": "ac_1",
+            "name": "Recepción de obra civil",
+            "items": ["Libre de cimbras", "Libre de rebajes"]
+        },
+        {
+            "uid": "ac_2",
+            "name": "Acabado exterior y fachada",
+            "items": ["Elaboración de pretil en fachada", "Filetes de mezcla en ventanas"]
+        }
+    ],
+    "ct": [
+        {
+            "uid": "ct_1",
+            "name": "Recepción de obra civil",
+            "items": ["Recepcion acabados y CT", "Lijado de yeso"]
+        },
+        { "uid": "ct_2", "name": "Lijado de yeso", "items": ["Lijado en muros de yeso"] }
+    ],
+    "entregas": [
+        {
+            "uid": "en_1",
+            "name": "Recepción CT",
+            "items": ["Accesorios eléctricos"]
+        },
+        {
+            "uid": "en_1",
+            "name": "Previa entrega de vivienda",
+            "items": ["Instalación de número oficial"]
+        }
+    ]
+}

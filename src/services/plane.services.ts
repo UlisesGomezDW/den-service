@@ -1,12 +1,11 @@
 import plane from "../data/plane.json"
 import blockData from "../data/blocks.json"
-import planes from "../data/plane.json"
 import { getNumberOfElements } from "../utils/filter"
-import { getPlotsByBlocks } from "../services/plot.service"
+import { getPlotById, getPlotsIdByPlane } from "../services/plot.service"
 import { getProgress } from "../utils/number"
 
 export function getAllPlanes() {
-    const data = plane.map(({ uid, blocks }) => {
+    const data = plane.map(({ uid, blocks, area }) => {
         const blocksItem = blocks.map((blockId) => {
             const block = blockData.find(({ uid }) => uid === blockId)
 
@@ -18,6 +17,7 @@ export function getAllPlanes() {
         return {
             uid,
             blocks: blocksItem,
+            area,
         }
     })
 
@@ -25,8 +25,10 @@ export function getAllPlanes() {
 }
 
 export function getTotals(planeId: string) {
-    const blocks = planes.find(({ uid }) => uid == planeId)?.blocks || []
-    const allPlots = getPlotsByBlocks(blocks)
+    const keys: any[] = getPlotsIdByPlane(`${planeId}`)
+    const allPlots = keys?.map((id = "") => {
+        return getPlotById(id)
+    })
     const incidents = allPlots.filter((plot) => plot?.incidents && plot?.incidents.length > 0)
     const subtotals = {
         toDo: getNumberOfElements(allPlots, "to-do"),
