@@ -8,10 +8,12 @@ const incidents_json_1 = __importDefault(require("../data/incidents.json"));
 const tasks_json_1 = __importDefault(require("../data/tasks.json"));
 function getInicidets(array) {
     return array.map((incidentId) => {
+        var _a;
         const incident = incidents_json_1.default.find(({ uid }) => uid === incidentId);
+        const index = incidents_json_1.default.findIndex(({ uid }) => uid == incidentId);
         return {
             id: incident === null || incident === void 0 ? void 0 : incident.uid,
-            name: incident === null || incident === void 0 ? void 0 : incident.name,
+            name: ((_a = tasks_json_1.default[index]) === null || _a === void 0 ? void 0 : _a.name) || "Tarea",
         };
     });
 }
@@ -22,7 +24,7 @@ function getTasks(array) {
         return {
             id: task === null || task === void 0 ? void 0 : task.uid,
             name: task === null || task === void 0 ? void 0 : task.name,
-            status: task === null || task === void 0 ? void 0 : task.status,
+            resolved: task === null || task === void 0 ? void 0 : task.resolved,
         };
     });
 }

@@ -35,15 +35,14 @@ export function getPlotById(plotId: string) {
     const plot = plotsData.find(({ uid }) => uid === plotUID)
 
     const area = getBatchList(planeId)
-    const incidents =
-        area
-            .map(({ ref }) => {
-                return getCheklist(planeId, plotUID, ref).pieceworks.map(({ incidents }) => {
-                    return incidents
-                })
+    const searchIncidents = area
+        .map(({ ref }) => {
+            return getCheklist(planeId, plotUID, ref).pieceworks.map(({ incidents, name }) => {
+                return { incidents: incidents.map(({ name }) => name), name }
             })
-            .flat(1) || []
-
+        })
+        .flat(1)
+    const incidents: any[] = searchIncidents.filter(({ incidents }) => incidents.length > 0)
     return {
         ...plot,
         uid: plotId,

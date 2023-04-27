@@ -38,13 +38,14 @@ function getPlotById(plotId) {
     const [planeId, mzId, plotUID] = (0, string_1.getId)(plotId);
     const plot = plots_json_1.default.find(({ uid }) => uid === plotUID);
     const area = (0, checklist_service_1.getBatchList)(planeId);
-    const incidents = area
+    const searchIncidents = area
         .map(({ ref }) => {
-        return (0, checklist_service_1.getCheklist)(planeId, plotUID, ref).pieceworks.map(({ incidents }) => {
-            return incidents;
+        return (0, checklist_service_1.getCheklist)(planeId, plotUID, ref).pieceworks.map(({ incidents, name }) => {
+            return { incidents: incidents.map(({ name }) => name), name };
         });
     })
-        .flat(1) || [];
+        .flat(1);
+    const incidents = searchIncidents.filter(({ incidents }) => incidents.length > 0);
     return Object.assign(Object.assign({}, plot), { uid: plotId, name: (0, string_1.getPlotName)((0, string_1.getNumberKey)(mzId), (0, string_1.getNumberKey)(plotUID)), finishDate: (plot === null || plot === void 0 ? void 0 : plot.finishDate) ? (0, date_1.getDateString)(plot === null || plot === void 0 ? void 0 : plot.finishDate, true) : "", incidents: (plot === null || plot === void 0 ? void 0 : plot.status) === "in-progress" ? incidents : [] });
 }
 exports.getPlotById = getPlotById;

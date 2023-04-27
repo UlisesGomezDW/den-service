@@ -6,7 +6,7 @@
         "pieceworker": ["pieceworker_1", "pieceworker_2", "pieceworker_3", "pieceworker_4", "pieceworker_5"],
         "photos": ["photo_1.jpg", "photo_2.jpg", "photo_3.jpg", "photo_4.jpg", "photo_5.jpg"],
         "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "status": "finished"
+        "resolved": true
     },
     {
         "uid": "task_2",
@@ -15,7 +15,7 @@
         "pieceworker": ["pieceworker_1", "pieceworker_2", "pieceworker_3"],
         "photos": ["photo_1.jpg", "photo_2.jpg", "photo_3.jpg"],
         "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "status": "to-do"
+        "resolved": false
     },
     {
         "uid": "task_3",
@@ -24,7 +24,7 @@
         "pieceworker": ["pieceworker_1"],
         "photos": ["photo_1.jpg"],
         "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "status": "finished"
+        "resolved": true
     },
     {
         "uid": "task_4",
@@ -33,7 +33,7 @@
         "pieceworker": ["pieceworker_1", "pieceworker_2", "pieceworker_3", "pieceworker_4"],
         "photos": ["photo_1.jpg", "photo_2.jpg", "photo_3.jpg", "photo_4.jpg"],
         "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "status": "in-progress"
+        "resolved": false
     },
     {
         "uid": "task_5",
@@ -42,6 +42,15 @@
         "pieceworker": ["pieceworker_1", "pieceworker_2", "pieceworker_3", "pieceworker_4", "pieceworker_5"],
         "photos": ["photo_1.jpg", "photo_2.jpg", "photo_3.jpg", "photo_4.jpg", "photo_5.jpg"],
         "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-        "status": "in-progress"
+        "resolved": true
+    },
+    {
+        "uid": "task_6",
+        "name": "Tarea 6",
+        "leader": "leader_5",
+        "pieceworker": ["pieceworker_1", "pieceworker_2", "pieceworker_3", "pieceworker_4", "pieceworker_5"],
+        "photos": ["photo_1.jpg", "photo_2.jpg", "photo_3.jpg", "photo_4.jpg", "photo_5.jpg"],
+        "comments": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+        "resolved": false
     }
 ]

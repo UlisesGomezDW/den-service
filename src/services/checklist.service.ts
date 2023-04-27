@@ -5,6 +5,7 @@ import piecework from "../data/piecework.json"
 import groups from "../data/groups.json"
 import planes from "../data/plane.json"
 import lista from "../data/lista.json"
+import plots from "../data/plots.json"
 import { getInicidets, getTasks } from "../services/pieceworker.services"
 
 type ListaItem = typeof lista.ct
@@ -27,6 +28,7 @@ export function getBatchList(planeId: string) {
 
 export function getCheklist(plnaeId: string, plotId: string, ref: string) {
     const collection = Object.values(lista).flat(1) || []
+    const status = plots.find(({ uid }) => uid === plotId)?.status
     const items = collection.find(({ uid }) => uid === ref)?.items || []
     const index = collection.findIndex(({ uid }) => uid === ref) || 0
 
@@ -36,25 +38,37 @@ export function getCheklist(plnaeId: string, plotId: string, ref: string) {
         uid: `${plnaeId}-${plotId}-${ref}`,
         startDate: getDateString(group?.startDate || ""),
         finishDate: getDateString(group?.finishDate || ""),
+        completed: status === "finished",
     }
     const pieceworkList =
         items.map((key, index) => {
             let item = piecework[index]
-            return {
-                ...item,
-                name: key,
-                editable: true,
-                incidents: item.status === "in-progress" ? getInicidets(item.incidents) : [],
-                status:
-                    item.status === "in-progress"
-                        ? getInicidets(item.incidents).length > 0
-                            ? "incidents"
-                            : "in-progress"
-                        : item.status,
-                tasks: getTasks(item.tasks),
-                startDate: getDateString(item.startDate),
-                finishDate: getDateString(item.finishDate),
-            }
+            return status === "finished"
+                ? {
+                      ...item,
+                      name: key,
+                      editable: false,
+                      incidents: [],
+                      status: "finished",
+                      tasks: [],
+                      startDate: getDateString(item.startDate),
+                      finishDate: getDateString(item.finishDate),
+                  }
+                : {
+                      ...item,
+                      name: key,
+                      editable: item.status !== "finished",
+                      incidents: item.status === "in-progress" ? getInicidets(item.incidents) : [],
+                      status:
+                          item.status === "in-progress"
+                              ? getInicidets(item.incidents).length > 0
+                                  ? "incidents"
+                                  : "in-progress"
+                              : item.status,
+                      tasks: getTasks(item.tasks),
+                      startDate: getDateString(item.startDate),
+                      finishDate: getDateString(item.finishDate),
+                  }
         }) || []
 
     const incidents = pieceworkList.filter(({ incidents }) => incidents.length > 0).length
