@@ -31,4 +31,24 @@ router.post("/validation", (req: Request, res: Response) => {
     }
 })
 
+router.post("/validation-multiple", (req: Request, res: Response) => {
+    const { plots = [], comments = "" } = req.body
+    try {
+        if (Object.values(req.body).length > 0) {
+            res.json({
+                ...response_success,
+                data: {
+                    plots,
+                    comments,
+                },
+            }).status(200)
+        } else {
+            res.json({ ...response_error, message: "not data" })
+        }
+    } catch (err: any) {
+        console.error(err)
+        res.json({ ...response_error, message: err?.message })
+    }
+})
+
 export default router
