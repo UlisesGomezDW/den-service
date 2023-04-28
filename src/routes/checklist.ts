@@ -89,4 +89,21 @@ router.get("/", (req: Request, res: Response) => {
     }
 })
 
+router.post("/pending-completion", (req: Request, res: Response) => {
+    const { pieceworks = [] } = req.body
+    try {
+        if (Object.values(req.body).length > 0) {
+            res.json({
+                ...response_success,
+                data: { pieceworks },
+            }).status(200)
+        } else {
+            res.json({ ...response_error, message: "not data" })
+        }
+    } catch (err: any) {
+        console.error(err)
+        res.json({ ...response_error, message: err?.message })
+    }
+})
+
 export default router
