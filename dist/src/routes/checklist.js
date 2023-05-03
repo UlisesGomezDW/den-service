@@ -58,7 +58,8 @@ router.get("/", (req, res) => {
                 return plots;
             })
                 .flat(2);
-            const data = [...new Set(plotsArray)].map((key = "") => {
+            const data = [...new Set(plotsArray)]
+                .map((key = "") => {
                 const path = key.split("-");
                 const planeId = path[0];
                 const plotId = path[1];
@@ -66,8 +67,9 @@ router.get("/", (req, res) => {
                 return list.map((ref) => {
                     return (0, checklist_service_1.getCheklist)(planeId, plotId, ref);
                 });
-            });
-            res.json(Object.assign(Object.assign({}, constants_1.response_success), { data: [...new Set(data)] })).status(200);
+            })
+                .flat(1);
+            res.json(Object.assign(Object.assign({}, constants_1.response_success), { data })).status(200);
         }
     }
     catch (err) {

@@ -67,20 +67,22 @@ router.get("/", (req: Request, res: Response) => {
                 })
                 .flat(2)
 
-            const data = [...new Set(plotsArray)].map((key = "") => {
-                const path = key.split("-")
-                const planeId = path[0]
-                const plotId = path[1]
+            const data = [...new Set(plotsArray)]
+                .map((key = "") => {
+                    const path = key.split("-")
+                    const planeId = path[0]
+                    const plotId = path[1]
 
-                const list = getBatchList(planeId).map(({ ref }) => ref)
+                    const list = getBatchList(planeId).map(({ ref }) => ref)
 
-                return list.map((ref) => {
-                    return getCheklist(planeId, plotId, ref)
+                    return list.map((ref) => {
+                        return getCheklist(planeId, plotId, ref)
+                    })
                 })
-            })
+                .flat(1)
             res.json({
                 ...response_success,
-                data: [...new Set(data)],
+                data,
             }).status(200)
         }
     } catch (err: any) {
