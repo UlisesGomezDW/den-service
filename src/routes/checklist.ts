@@ -5,6 +5,7 @@ import lista from "../data/lista.json"
 import { getBatchList, getCheklist } from "../services/checklist.service"
 import { getAllPlanes } from "../services/plane.services"
 import { getId } from "../utils/string"
+import { createPromise } from "../utils/promise"
 
 const router = Router()
 
@@ -43,13 +44,13 @@ router.get("/batch", (req: Request, res: Response) => {
     }
 })
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
     try {
         const plotId = req.query?.plotId || ""
         const ref = req.query?.ref || ""
-        if (plotId && plotId) {
+        if (plotId && ref) {
             const [planeId, mz, plotID] = getId(`${plotId}`)
-            const data = getCheklist(`${planeId}`, `${plotID}`, `${ref}`)
+            const data = await createPromise(getCheklist(`${planeId}`, `${plotID}`, `${ref}`))
             res.json({
                 ...response_success,
                 data,
