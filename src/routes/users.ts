@@ -9,11 +9,12 @@ const router = Router()
 
 router.use(authMiddleware)
 
-router.get("/pieceworkers", (req: Request, res: Response) => {
+router.get("/pieceworkers", async (req: Request, res: Response) => {
     try {
+        const data = await createPromise(pieceworkers, 2000)
         res.json({
             ...response_success,
-            data: pieceworkers,
+            data,
         }).status(200)
     } catch (err: any) {
         console.error(err)
@@ -21,11 +22,12 @@ router.get("/pieceworkers", (req: Request, res: Response) => {
     }
 })
 
-router.get("/leaders", (req: Request, res: Response) => {
+router.get("/leaders", async (req: Request, res: Response) => {
+    const data = await createPromise(leaders, 2000)
     try {
         res.json({
             ...response_success,
-            data: leaders,
+            data,
         }).status(200)
     } catch (err: any) {
         console.error(err)
